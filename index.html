@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Javeria! 🎉✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+            min-height: 100vh;
+            color: #4a4a4a;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* ---------------- LOCK SCREEN ---------------- */
+        #lockScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 182, 193, 0.96);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .pass-box {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.35);
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            border: 3px solid #ff6b81;
+        }
+
+        .pass-box h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4757;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .pass-input {
+            width: 85%;
+            padding: 14px;
+            border: 2px solid #ff6b81;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            outline: none;
+            margin: 15px 0;
+            font-family: inherit;
+        }
+
+        .btn-main {
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 129, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 129, 0.6);
+        }
+
+        .shake { animation: shakeAnim 0.4s ease-in-out; }
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-12px); }
+            40%, 80% { transform: translateX(12px); }
+        }
+
+        #errorMsg {
+            color: #ff4757;
+            font-size: 0.95rem;
+            margin-top: 12px;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* ---------------- MAIN LAYOUT ---------------- */
+        #mainContent {
+            display: none;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .hero-banner {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            backdrop-filter: blur(8px);
+        }
+
+        h1.title {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4757;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* ---------------- JUKEBOX ---------------- */
+        .jukebox-card {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .vinyl {
+            width: 90px; height: 90px;
+            background: #111;
+            border-radius: 50%;
+            border: 6px solid #333;
+            display: flex; align-items: center; justify-content: center;
+            animation: spin 3s linear infinite;
+            animation-play-state: paused;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .vinyl-inner {
+            width: 30px; height: 30px;
+            background: #ff6b81;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* ---------------- GALLERY & CARDS ---------------- */
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4757;
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .polaroid-card {
+            background: #fff;
+            padding: 15px 15px 25px 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid-card:nth-child(even) { transform: rotate(2deg); }
+        .polaroid-card:hover { transform: scale(1.03) rotate(0deg); }
+
+        .polaroid-img {
+            width: 100%;
+            height: 180px;
+            background: #f8a5c2;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        /* ---------------- TIME CAPSULE ---------------- */
+        .capsule-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px dashed #ff6b81;
+            text-align: center;
+        }
+
+        .capsule-card:hover {
+            transform: translateY(-5px);
+            background: #fff0f3;
+        }
+
+        /* ---------------- LOVE METER ---------------- */
+        .meter-container {
+            background: #fff;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            margin: 30px 0;
+        }
+
+        .hold-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+            transition: transform 0.1s;
+        }
+
+        .hold-btn:active { transform: scale(0.95); }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff6b81, #ff4757);
+            transition: width 0.1s linear;
+        }
+
+        /* ---------------- SCRATCH CARD ---------------- */
+        .scratch-container {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .scratch-secret {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: #ff4757; padding: 15px;
+            text-align: center;
+        }
+
+        canvas#scratchCanvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            cursor: pointer;
+        }
+
+        /* ---------------- CERTIFICATE ---------------- */
+        .certificate {
+            background: #ffffff;
+            border: 6px double #ff6b81;
+            border-radius: 25px;
+            padding: 40px 25px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        /* ---------------- BALLOONS ---------------- */
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            width: 55px; height: 70px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            cursor: pointer;
+            z-index: 100;
+            animation: floatUp 7s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-125vh); opacity: 0; }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-body {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 420px;
+            width: 85%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="happy_birthday_javeria.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 1. VIP Lock Screen -->
+    <div id="lockScreen">
+        <div class="pass-box" id="passBox">
+            <h2>🔑 VIP Celebration Zone</h2>
+            <p style="font-size: 0.95rem;">Enter Secret Password for Javeria!</p>
+            <input type="password" id="passInput" class="pass-input" placeholder="Password Here...">
+            <br>
+            <button class="btn-main" onclick="unlockSite()">Enter Party 🎈</button>
+            <div id="errorMsg">Nice try, stranger! Ask Malika for the key! 😜</div>
+        </div>
+    </div>
+
+    <!-- Main Web Application -->
+    <div id="mainContent">
+
+        <div class="hero-banner">
+            <h1 class="title">🎉 Happy Birthday Javeria! 💖</h1>
+            <p style="font-size: 1.1rem; margin-top: 10px;">Welcome to your official birthday website created with love!</p>
+        </div>
+
+        <!-- 2. Jukebox -->
+        <div class="jukebox-card">
+            <div class="vinyl" id="vinylRecord">
+                <div class="vinyl-inner"></div>
+            </div>
+            <div>
+                <h3 style="color: #ff4757;">🎵 Jukebox Player</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">Track: Happy Birthday Javeria Special</p>
+                <button class="btn-main" style="padding: 8px 20px; font-size: 0.9rem;" onclick="toggleMusic()">Pause / Play 🎶</button>
+            </div>
+        </div>
+
+        <!-- 3. Photo Gallery -->
+        <h2 class="section-title">📸 Memory Lane</h2>
+        <div class="grid-3">
+            <div class="polaroid-card">
+                <div class="polaroid-img">Photo #1 ✨</div>
+                <p style="font-weight: 600;">Best Memories</p>
+            </div>
+            <div class="polaroid-card">
+                <div class="polaroid-img">Photo #2 💖</div>
+                <p style="font-weight: 600;">Fun Times</p>
+            </div>
+            <div class="polaroid-card">
+                <div class="polaroid-img">Photo #3 🌸</div>
+                <p style="font-weight: 600;">Forever Friends</p>
+            </div>
+        </div>
+
+        <!-- 4. Time Capsule -->
+        <h2 class="section-title">⏳ Time Capsule Messages</h2>
+        <div class="grid-3">
+            <div class="capsule-card" onclick="openNote('Feeling Sad 🥺', 'Remember that Malika is always just one call away! You are strong and loved!')">
+                <h3>Open when feeling sad 🥺</h3>
+            </div>
+            <div class="capsule-card" onclick="openNote('Exam Day 📚', 'Deep breath! You have prepared well and you will do great!')">
+                <h3>Open on exam day 📚</h3>
+            </div>
+            <div class="capsule-card" onclick="openNote('Missing Me 💕', 'Sending you the biggest virtual hug right now! 🤗✨')">
+                <h3>Open when you miss me 💕</h3>
+            </div>
+        </div>
+
+        <!-- 5. Interactive Love Meter -->
+        <div class="meter-container">
+            <h2 style="font-family: 'Fredoka One', cursive; color: #ff4757; margin-bottom: 10px;">💖 Friendship Meter</h2>
+            <p style="margin-bottom: 15px;">Press and HOLD the heart button to fill the meter to 100%!</p>
+            <button class="hold-btn" id="holdBtn">💖</button>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <p id="meterStatus" style="margin-top: 10px; font-weight: 600; color: #ff4757;">0%</p>
+        </div>
+
+        <!-- 6. Scratch Card Surprise -->
+        <h2 class="section-title">🎁 Scratch Card Surprise</h2>
+        <p style="text-align: center;">Use mouse or finger to scratch the grey card below!</p>
+        <div class="scratch-container">
+            <div class="scratch-secret">
+                🌟 "Javeria, you are a true gift in my life! Wish you endless happiness!" 🎂
+            </div>
+            <canvas id="scratchCanvas" width="300" height="150"></canvas>
+        </div>
+
+        <!-- 7. BFF Certificate -->
+        <div class="certificate">
+            <h2 style="font-family: 'Fredoka One', cursive; color: #ff6b81; font-size: 2.2rem;">📜 Best Friends Forever Certificate</h2>
+            <p style="margin-top: 15px; font-size: 1.1rem;">This certificate is officially presented to</p>
+            <h1 style="color: #ff4757; font-size: 2.5rem; margin: 10px 0;">Javeria</h1>
+            <p style="font-size: 1.1rem;">for being the most supportive, wonderful, and caring friend!</p>
+            <p style="font-weight: bold; color: #ff6b81; margin-top: 25px; font-size: 1.2rem;">Certified with Love by: Malika 💖</p>
+        </div>
+
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="noteModal">
+        <div class="modal-body">
+            <h3 id="modalTitle" style="color: #ff4757; margin-bottom: 10px;"></h3>
+            <p id="modalMessage" style="font-size: 1rem; line-height: 1.5; margin-bottom: 20px;"></p>
+            <button class="btn-main" onclick="closeNote()">Close 💕</button>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_PASS = "javeria"; // Change password here
+
+        // Audio helper using Web Audio API synthesizer fallback if file fails
+        let audioCtx;
+        function playFallbackSound() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch(e){}
+        }
+
+        function unlockSite() {
+            const input = document.getElementById('passInput').value.trim().toLowerCase();
+            const passBox = document.getElementById('passBox');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (input === SECRET_PASS) {
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Play Audio
+                const music = document.getElementById('bgMusic');
+                music.play().then(() => {
+                    document.getElementById('vinylRecord').style.animationPlayState = 'running';
+                }).catch((e) => {
+                    console.log('Browser blocked autoplay or audio file missing. Fallback initialized.');
+                });
+
+                initScratchCard();
+                startBalloons();
+            } else {
+                passBox.classList.add('shake');
+                errorMsg.style.display = 'block';
+                setTimeout(() => passBox.classList.remove('shake'), 400);
+            }
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const vinyl = document.getElementById('vinylRecord');
+            if (music.paused) {
+                music.play().catch(() => playFallbackSound());
+                vinyl.style.animationPlayState = 'running';
+            } else {
+                music.pause();
+                vinyl.style.animationPlayState = 'paused';
+            }
+        }
+
+        function openNote(title, msg) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = msg;
+            document.getElementById('noteModal').style.display = 'flex';
+        }
+
+        function closeNote() {
+            document.getElementById('noteModal').style.display = 'none';
+        }
+
+        /* Hold to Fill Meter logic */
+        let holdTimer;
+        let progress = 0;
+        const holdBtn = document.getElementById('holdBtn');
+        const fill = document.getElementById('progressFill');
+        const status = document.getElementById('meterStatus');
+
+        function startHold() {
+            holdTimer = setInterval(() => {
+                if (progress < 100) {
+                    progress += 2;
+                    fill.style.width = progress + '%';
+                    status.innerText = progress + '%';
+                } else {
+                    status.innerText = "100% Love & Besties Forever! 🎉💖";
+                    clearInterval(holdTimer);
+                }
+            }, 50);
+        }
+
+        function stopHold() {
+            clearInterval(holdTimer);
+        }
+
+        holdBtn.addEventListener('mousedown', startHold);
+        holdBtn.addEventListener('mouseup', stopHold);
+        holdBtn.addEventListener('mouseleave', stopHold);
+        holdBtn.addEventListener('touchstart', startHold);
+        holdBtn.addEventListener('touchend', stopHold);
+
+        /* Scratch Card Canvas */
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#b2bec3';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#636e72';
+            ctx.font = '16px Poppins';
+            ctx.fillText('Scratch Here!', 100, 80);
+
+            let isScratching = false;
+
+            function scratch(e) {
+                if (!isScratching) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 15, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            canvas.addEventListener('mousedown', () => isScratching = true);
+            canvas.addEventListener('mouseup', () => isScratching = false);
+            canvas.addEventListener('mousemove', scratch);
+            canvas.addEventListener('touchstart', () => isScratching = true);
+            canvas.addEventListener('touchend', () => isScratching = false);
+            canvas.addEventListener('touchmove', scratch);
+        }
+
+        /* Balloon Generator */
+        function startBalloons() {
+            const colors = ['#ff6b81', '#ff9ff3', '#feca57', '#48dbfb', '#ff9a9e'];
+            setInterval(() => {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 85 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 3 + 6) + 's';
+                
+                balloon.onclick = function() {
+                    playFallbackSound();
+                    this.remove();
+                };
+
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 7000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
